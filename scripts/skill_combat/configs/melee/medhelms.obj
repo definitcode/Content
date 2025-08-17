@@ -1,7 +1,7 @@
 [iron_med_helm]
 name=Iron med helm
 desc=A medium sized helmet.
-cost=84
+cost=250
 model=model_2833_obj
 recol1s=15855
 recol1d=8456
@@ -60,7 +60,7 @@ param=rangedefence,4
 [steel_med_helm]
 name=Steel med helm
 desc=A medium sized helmet.
-cost=300
+cost=2785
 model=model_2833_obj
 2dxof=1
 2dyof=-4
@@ -87,7 +87,7 @@ param=rangedefence,7
 [mithril_med_helm]
 name=Mithril med helm
 desc=A medium sized helmet.
-cost=780
+cost=3150
 model=model_2833_obj
 recol1s=15855
 recol1d=6346
@@ -116,7 +116,7 @@ param=rangedefence,10
 [adamant_med_helm]
 name=Adamant med helm
 desc=A medium sized helmet.
-cost=1920
+cost=4875
 model=model_2833_obj
 recol1s=15855
 recol1d=6438
@@ -145,7 +145,7 @@ param=rangedefence,14
 [rune_med_helm]
 name=Rune med helm
 desc=A medium sized helmet.
-cost=19200
+cost=5200
 model=model_2833_obj
 recol1s=15855
 recol1d=6476
@@ -171,39 +171,6 @@ param=crushdefence,21
 param=magicdefence,-1
 param=rangedefence,22
 
-[dragon_med_helm]
-name=Dragon med helm
-desc=Makes the wearer pretty intimidating.
-cost=100000
-manwear=model_219_obj_wear,0
-manwear2=model_239_obj_wear
-womanwear=model_395_obj_wear,0
-womanwear2=model_239_obj_wear
-manhead=model_57_obj_wear
-manhead2=model_71_obj_wear
-womanhead=model_117_obj_wear
-womanhead2=model_129_obj_wear
-model=model_2477_obj
-recol1s=15855
-recol1d=14336
-2dxof=3
-2dyof=-5
-2dzoom=670
-2dyan=136
-2dxan=92
-iop2=Wear
-wearpos=hat
-wearpos2=head
-category=armour_helmet
-weight=3lb
-members=yes
-param=rangeattack,-1
-param=magicattack,-3
-param=stabdefence,33
-param=slashdefence,35
-param=crushdefence,32
-param=magicdefence,-1
-param=rangedefence,34
 
 [black_med_helm]
 name=Black med helm

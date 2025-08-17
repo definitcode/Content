@@ -4,7 +4,7 @@ walkanim=dragon_walk
 readyanim=dragon_ready
 resizeh=160
 resizev=160
-name=King black dragon
+name=King Black Dragon
 desc=The biggest meanest dragon around.
 op2=Attack
 vislevel=238
@@ -25,19 +25,19 @@ maxrange=20
 // https://youtu.be/KhI0x-fSKac?list=PLn23LiLYLb1bYAFU3Vdk3N9niuHs-b-4-&t=147
 // best video i could find
 huntrange=20
-attackrange=15
+attackrange=20
 // based on this video. Should be double the respawn of this https://youtu.be/P8BxiqEV7ws
-respawnrate=150
-hitpoints=240
-attack=240
-strength=240
-defence=240
-magic=240
-param=stabdefence,70
-param=slashdefence,90
+respawnrate=360
+hitpoints=255
+attack=255
+strength=255
+defence=200
+magic=255
+param=stabdefence,160
+param=slashdefence,160
 param=crushdefence,90
-param=magicdefence,80
-param=rangedefence,70
+param=magicdefence,190
+param=rangedefence,190
 param=damagetype,^stab_style
 param=attack_anim,dragon_attack
 param=defend_anim,dragon_block
@@ -48,5 +48,5 @@ param=death_sound,dragon_death
 param=death_drop,dragon_bones
 huntmode=king_dragon
 // Stats match osrs version but our version Vislvl is different.
-// https://raw.githubusercontent.com/Joshua-F/osrs-dumps/refs/heads/master/config/dump.npc npc_239
+// https://raw.githubusercontent.com/Joshua-F/osrs-dumps/refs/heads/master/config/dump.npc
 // this variation have old stats npc_6502

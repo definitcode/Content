@@ -60,9 +60,12 @@ data=stun_damage,2
 data=success_chance,74,240
 data=loot,coins,25,40,108
 data=loot,airrune,8,8,8
-data=loot,jug_wine,1,1,6
+data=loot,mindrune,8,8,8
 data=loot,lockpick,1,1,5
-data=loot,iron_dagger_p,1,1,1
+data=loot,rogue_badge_easy,1,1,100
+data=loot,rogue_badge_medium,1,1,40
+data=loot,rogue_badge_hard,1,1,10
+data=loot,rogue_badge_insane,1,1,2
 data=pocket,rogue's pocket
 
 [pickpocket_guard]

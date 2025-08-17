@@ -3,11 +3,13 @@
 
 
 [label,black_knight_drops]
-gosub(npc_death);
-if (npc_findhero = ^false) {
+if (npc_findhero = false) {
     return;
 }
-
+if (npc_findhero = true) {
+    queue(black_knight_kill, 0);
+}
+gosub(npc_death);
 // Default drop from config.
 obj_add(npc_coord, npc_param(death_drop), 1, ^lootdrop_duration);
 
@@ -59,4 +61,12 @@ if ($random < 4) {
     obj_add(npc_coord, bread, 1, ^lootdrop_duration);
 } else if ($random < 108) {
     obj_add(npc_coord, ~randomjewel, ^lootdrop_duration);
+} else if ($random < 126) {
+    obj_add(npc_coord, ~mid_tier_items, ^lootdrop_duration);
 }
+
+[queue,black_knight_kill]
+if (%e_ctoggle = ^e_toggle_on){
+    mes("You etch another tally into your ledger.");
+}
+%black_knight_kc = calc(%black_knight_kc + 1);

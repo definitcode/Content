@@ -1,6 +1,6 @@
 [trail_chart]
 name=Chart
-desc=A navigator's chart of RuneScape.
+desc=A navigator's chart of only2004.
 cost=2
 weight=10g
 members=yes
@@ -33,7 +33,7 @@ tradeable=no
 
 [trail_sextant]
 name=Sextant
-desc=Used by navigators to find their position in RuneScape.
+desc=Used by navigators to find their position in only2004.
 cost=50
 weight=200g
 members=yes

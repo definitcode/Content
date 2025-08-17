@@ -1,3 +1,16 @@
+[pizzabaseshop]
+// https://classic.runescape.wiki/w/Pizza_Base_Shop
+// https://storage.googleapis.com/tannerdino/images/rsbandit5.gif
+scope=shared
+size=40
+restock=yes
+stackall=yes
+allstock=no
+stock1=pizza_base,30,100
+stock2=anchovies,30,100
+stock3=tomato,15,50
+stock4=cheese,15,50
+
 [taxfree]
 // https://classic.runescape.wiki/w/Bandit_Camp_General_Store
 // https://storage.googleapis.com/tannerdino/images/rsbandit4.gif
@@ -13,13 +26,6 @@ stock4=chisel,2,100
 stock5=hammer,5,100
 stock6=bronze_pickaxe,5,100
 stock7=bronze_axe,10,100
-
-[pizzabaseshop]
-// https://classic.runescape.wiki/w/Pizza_Base_Shop
-// https://storage.googleapis.com/tannerdino/images/rsbandit5.gif
-scope=shared
-size=40
-restock=yes
-stackall=yes
-allstock=no
-stock1=pizza_base,30,100
+stock8=macro_triffidfruit,10,100
+stock9=player_ledger,10,100
+stock10=player_checkbook,10,100

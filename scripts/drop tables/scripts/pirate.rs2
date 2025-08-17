@@ -1,9 +1,12 @@
 [ai_queue3,_pirate]
-gosub(npc_death);
-if (npc_findhero = ^false) {
+if (npc_findhero = false) {
     return;
 }
+if (npc_findhero = true) {
+    queue(pirate_kill, 0);
+}
 
+gosub(npc_death);
 // Default drop from config.
 obj_add(npc_coord, npc_param(death_drop), 1, ^lootdrop_duration);
 
@@ -16,35 +19,42 @@ if ($random < 6) {
 } else if ($random < 11) {
     obj_add(npc_coord, iron_platebody, 1, ^lootdrop_duration);
 } else if ($random < 17) {
-    obj_add(npc_coord, chaosrune, 2, ^lootdrop_duration);
+    obj_add(npc_coord, chaosrune, 5, ^lootdrop_duration);
 } else if ($random < 22) {
-    obj_add(npc_coord, naturerune, 2, ^lootdrop_duration);
+    obj_add(npc_coord, naturerune, 10, ^lootdrop_duration);
 } else if ($random < 25) {
-    obj_add(npc_coord, bronze_arrow, 9, ^lootdrop_duration);
+    obj_add(npc_coord, bronze_arrow, 19, ^lootdrop_duration);
 } else if ($random < 27) {
-    obj_add(npc_coord, bronze_arrow, 12, ^lootdrop_duration);
+    obj_add(npc_coord, bronze_arrow, 22, ^lootdrop_duration);
 } else if ($random < 29) {
-    obj_add(npc_coord, airrune, 10, ^lootdrop_duration);
+    obj_add(npc_coord, airrune, 50, ^lootdrop_duration);
 } else if ($random < 31) {
-    obj_add(npc_coord, earthrune, 9, ^lootdrop_duration);
+    obj_add(npc_coord, earthrune, 45, ^lootdrop_duration);
+    obj_add(npc_coord, mindrune, 50, ^lootdrop_duration);
 } else if ($random < 33) {
-    obj_add(npc_coord, firerune, 5, ^lootdrop_duration);
+    obj_add(npc_coord, firerune, 50, ^lootdrop_duration);
 } else if ($random < 34) {
-    obj_add(npc_coord, lawrune, 2, ^lootdrop_duration);
+    obj_add(npc_coord, lawrune, 5, ^lootdrop_duration);
 } else if ($random < 63) {
-    obj_add(npc_coord, coins, 4, ^lootdrop_duration);
+    obj_add(npc_coord, shillings, 4, ^lootdrop_duration);
 } else if ($random < 76) {
-    obj_add(npc_coord, coins, 25, ^lootdrop_duration);
+    obj_add(npc_coord, shillings, 250, ^lootdrop_duration);
 } else if ($random < 84) {
-    obj_add(npc_coord, coins, 7, ^lootdrop_duration);
+    obj_add(npc_coord, shillings, 7, ^lootdrop_duration);
 } else if ($random < 90) {
-    obj_add(npc_coord, coins, 12, ^lootdrop_duration);
+    obj_add(npc_coord, shillings, 120, ^lootdrop_duration);
 } else if ($random < 94) {
-    obj_add(npc_coord, coins, 35, ^lootdrop_duration);
+    obj_add(npc_coord, shillings, 35, ^lootdrop_duration);
 } else if ($random < 95) {
-    obj_add(npc_coord, coins, 55, ^lootdrop_duration);
+    obj_add(npc_coord, shillings, 55, ^lootdrop_duration);
+
+} else if ($random < 105) {
+    obj_add(npc_coord, pirate_pants, 1, ^lootdrop_duration);
+
+} else if ($random < 106) {
+    obj_add(npc_coord, piratehat, 1, ^lootdrop_duration);
 } else if ($random < 107) {
-    if (map_members = ^true) {
+    if (map_members = true) {
         obj_add(npc_coord, eye_patch, 1, ^lootdrop_duration);
     }
 } else if ($random < 108) {
@@ -53,4 +63,10 @@ if ($random < 6) {
     obj_add(npc_coord, iron_bar, 1, ^lootdrop_duration);
 } else if ($random < 110) {
     obj_add(npc_coord, ~randomjewel, ^lootdrop_duration);
+    obj_add(npc_coord, ~grindingtable, ^lootdrop_duration);
 }
+[queue,pirate_kill]
+if (%e_ctoggle = ^e_toggle_on){
+    mes("You etch another tally into your ledger.");
+}
+%pirate_kc = calc(%pirate_kc  + 1);

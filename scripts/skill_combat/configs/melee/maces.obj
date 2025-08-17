@@ -1,7 +1,7 @@
 [iron_mace]
 name=Iron mace
 desc=A spiky mace.
-cost=63
+cost=250
 iop2=Wield
 wearpos=righthand
 manwear=model_502_obj_wear,0
@@ -60,7 +60,7 @@ param=stab_sound,mace_stab
 [steel_mace]
 name=Steel mace
 desc=A spiky mace.
-cost=225
+cost=2785
 iop2=Wield
 wearpos=righthand
 manwear=model_502_obj_wear,0
@@ -87,7 +87,7 @@ param=stab_sound,mace_stab
 [black_mace]
 name=Black mace
 desc=A spiky mace.
-cost=432
+cost=2875
 iop2=Wield
 wearpos=righthand
 manwear=model_502_obj_wear,0
@@ -116,7 +116,7 @@ param=stab_sound,mace_stab
 [mithril_mace]
 name=Mithril mace
 desc=A spiky mace.
-cost=585
+cost=3500
 iop2=Wield
 wearpos=righthand
 manwear=model_502_obj_wear,0
@@ -145,7 +145,7 @@ param=stab_sound,mace_stab
 [adamant_mace]
 name=Adamant mace
 desc=A spiky mace.
-cost=1440
+cost=4850
 iop2=Wield
 wearpos=righthand
 manwear=model_502_obj_wear,0
@@ -174,7 +174,7 @@ param=stab_sound,mace_stab
 [rune_mace]
 name=Rune mace
 desc=A spiky mace.
-cost=14400
+cost=5850
 iop2=Wield
 wearpos=righthand
 manwear=model_502_obj_wear,0
@@ -191,7 +191,7 @@ weight=4lb
 param=stabattack,20
 param=slashattack,-2
 param=crushattack,39
-param=strengthbonus,36
+param=strengthbonus,50
 param=prayerbonus,4
 param=attackrate,5
 param=crushattack_anim,human_blunt_pound
@@ -200,33 +200,3 @@ param=defend_anim,human_blunt_block
 param=crush_sound,mace_crush
 param=stab_sound,mace_stab
 
-[dragon_mace]
-members=yes
-name=Dragon mace
-desc=A spiky mace.
-cost=50000
-iop2=Wield
-wearpos=righthand
-manwear=model_493_obj_wear,0
-womanwear=model_493_obj_wear,6
-model=model_2391_obj
-2dxof=-13
-2dyof=13
-2dzoom=1440
-2dyan=1388
-2dxan=348
-category=weapon_spiked
-weight=4lb
-param=stabattack,40
-param=slashattack,-2
-param=crushattack,60
-param=strengthbonus,55
-param=prayerbonus,5
-param=attackrate,5
-param=crushattack_anim,human_blunt_pound
-param=stabattack_anim,human_blunt_spike
-param=defend_anim,human_blunt_block
-param=crush_sound,mace_crush
-param=stab_sound,mace_stab
-param=specwep,^true
-param=sa_energy,250

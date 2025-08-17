@@ -141,6 +141,9 @@ if ($locked = true) {
         def_namedobj $tool;
         def_string $name;
         $tool, $name = db_getfield($data, locked_door:tool, 0);
+        if (inv_total(inv, rogue_tools) > 0){
+            $tool = rogue_tools;
+        }
         if (inv_total(inv, $tool) = 0) {
             mes("You need a <$name> for this lock.");
             return;

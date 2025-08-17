@@ -15,6 +15,11 @@ switch_obj(last_useitem) {
 
 
 [label,attempt_cut_tree]
+if(%gamemode_selected = ^gamemode_pvp){
+    mes("You cannot do this.");
+    return;
+}
+~clearallq;
 // find tree in db
 db_find(woodcutting_trees:tree, loc_type);
 def_dbrow $data = db_findnext;
@@ -125,16 +130,99 @@ if ($respawnrate = 0) {
 }
 if (stat_random(woodcutting, $tree_chance_low, $tree_chance_high) = true) {
     def_namedobj $product = db_getfield($data, woodcutting_trees:product, 0);
-    mes("You get some <lowercase(oc_name($product))>.");
-    stat_advance(woodcutting, db_getfield($data, woodcutting_trees:productexp, 0));
-    inv_add(inv, $product, 1);
-    if (random($deplete_chance) = 0) {
+
+    def_int $exp = db_getfield($data, woodcutting_trees:productexp, 0);    if (random($deplete_chance) = 0) {
         $respawnrate = ~scale_by_playercount($respawnrate);
         loc_change(loc_param(next_loc_stage), $respawnrate);
         anim(null, 0);
         return;
     }
+    mes("You get some <lowercase(oc_name($product))>.");
+    if (inv_total(worn, cavalier_brown) > 0) {
+        stat_advance(woodcutting, $exp);
+        mes("Your woodcutting skills are showing!");
+    }
+    def_int $var_exp = null;
+    switch_obj($axe){
+        case dragon_axe : {
+            $productcount = 4;
+            $var_exp = multiply($exp, $productcount);
+            stat_advance(woodcutting, $var_exp);
+            if (inv_freespace(inv) < 4) {
+              $productcount = inv_freespace(inv);
+            }
+        }
+        case rune_axe : {
+            $productcount = 3;
+            $var_exp = multiply($exp, $productcount);
+            stat_advance(woodcutting, $var_exp);
+            if (inv_freespace(inv) < 3) {
+              $productcount = inv_freespace(inv);
+            }
+        }
+        case adamant_axe : {
+            $var_exp = multiply($exp, 2);
+            $productcount = 3;
+            if (inv_freespace(inv) < 2) {
+              $productcount = inv_freespace(inv);
+              $var_exp = multiply($exp, $productcount);
+            }
+            stat_advance(woodcutting, $var_exp);
+        }
+        case mithril_axe : {
+            $productcount = 2;
+            stat_advance(woodcutting, $exp);
+            if (inv_freespace(inv) < 2) {
+              $productcount = inv_freespace(inv);
+            }
+        }
+        case black_axe : {
+            $productcount = 1;
+            stat_advance(woodcutting, $exp);
+        }
+        case steel_axe : {
+            $productcount = 1;
+            stat_advance(woodcutting, $exp);
+        }
+        case founders_axe : {
+            $productcount = 1;
+            stat_advance(woodcutting, $exp);
+        }
+        case iron_axe : {
+            $productcount = 1;
+            stat_advance(woodcutting, $exp);
+        }
+        case bronze_axe : {
+            $productcount = 1;
+            stat_advance(woodcutting, $exp);
+        }
+    }
+    inv_add(inv, $product, $productcount);
+    switch_namedobj($product){
+        case logs : {
+            %logs_cut = calc(%logs_cut + $productcount);
+        }
+        case oak_logs : {
+            %oak_logs_cut = calc(%oak_logs_cut + $productcount);
+        }
+        case willow_logs : {
+            %willow_logs_cut = calc(%willow_logs_cut + $productcount);
+        }
+        case maple_logs : {
+            %maple_logs_cut = calc(%maple_logs_cut + $productcount);
+        }
+        case yew_logs : {
+            %yew_logs_cut = calc(%yew_logs_cut + $productcount);
+        }
+        case magic_logs : {
+            %magic_logs_cut = calc(%magic_logs_cut + $productcount);
+        }
+        case cursed_logs : {
+            %cursed_logs_cut = calc(%cursed_logs_cut + $productcount);
+        }
+    }
 }
+
 p_oploc(3);
 
 // check if player has axe and level, ifso return best axe
@@ -143,48 +231,35 @@ def_int $level = stat(woodcutting);
 def_obj $obj1 = inv_getobj(worn, ^wearpos_rhand);
 // no wc req in 2004, this is also the case in rsc. Heres a guide from 2004 that says so :
 // https://web.archive.org/web/20040622013913/http://runehq.com/viewguidedb.php?id=00330
-// if (($obj1 = rune_axe | inv_total(inv, rune_axe) > 0) & $level > 40) {
-//     return (rune_axe);
-// }
-// if (($obj1 = adamant_axe | inv_total(inv, adamant_axe) > 0) & $level > 30) {
-//     return (adamant_axe);
-// }
-// if (($obj1 = mithril_axe | inv_total(inv, mithril_axe) > 0) & $level > 20) {
-//     return (mithril_axe);
-// }
-// if (($obj1 = black_axe | inv_total(inv, black_axe) > 0) & $level > 10) {
-//     return (black_axe);
-// }
-// if (($obj1 = steel_axe | inv_total(inv, steel_axe) > 0) & $level > 5) {
-//     return (steel_axe);
-// }
-// if (($obj1 = iron_axe | inv_total(inv, iron_axe) > 0) & $level > 0) {
-//     return (iron_axe);
-// }
-// if (($obj1 = bronze_axe | inv_total(inv, bronze_axe) > 0) & $level > 0) {
-//     return (bronze_axe);
-// }
-if (($obj1 = rune_axe | inv_total(inv, rune_axe) > 0)) {
+if (($obj1 = dragon_axe) & $level > 90) {
+    return (dragon_axe);
+}
+if (($obj1 = rune_axe) & $level > 80) {
     return (rune_axe);
 }
-if (($obj1 = adamant_axe | inv_total(inv, adamant_axe) > 0)) {
+if (($obj1 = adamant_axe) & $level > 70) {
     return (adamant_axe);
 }
-if (($obj1 = mithril_axe | inv_total(inv, mithril_axe) > 0)) {
+if (($obj1 = mithril_axe) & $level > 50) {
     return (mithril_axe);
 }
-if (($obj1 = black_axe | inv_total(inv, black_axe) > 0)) {
+if (($obj1 = black_axe) & $level > 35) {
     return (black_axe);
 }
-if (($obj1 = steel_axe | inv_total(inv, steel_axe) > 0)) {
+if (($obj1 = steel_axe) & $level > 30) {
     return (steel_axe);
 }
-if (($obj1 = iron_axe | inv_total(inv, iron_axe) > 0)) {
+if (($obj1 = iron_axe) & $level > 15) {
     return (iron_axe);
 }
-if (($obj1 = bronze_axe | inv_total(inv, bronze_axe) > 0)) {
+if (($obj1 = bronze_axe) & $level > 0) {
     return (bronze_axe);
 }
+if (($obj1 = founders_axe) & $level > 0) {
+    return (founders_axe);
+}
+
+
 // mes("You need an axe to chop down this tree."); // this message was added in 2005 when they fixed axe wc reqs
 // https://imgur.com/Cj7w6y9
 // https://imgur.com/fnmlJ7R

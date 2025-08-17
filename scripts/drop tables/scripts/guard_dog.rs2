@@ -3,7 +3,7 @@ if (npc_findhero = ^true) { // intentional, https://youtu.be/tDN_dxiRQB8?si=tCHe
     ~trail_checkmediumdrop;
 }
 gosub(npc_death);
-if (npc_findhero = ^false) {
+if (npc_findhero = false) {
     return;
 }
 obj_add(npc_coord, npc_param(death_drop), 1, ^lootdrop_duration);

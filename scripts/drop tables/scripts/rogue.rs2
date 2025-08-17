@@ -2,13 +2,16 @@
 // https://oldschool.runescape.wiki/w/Rogue#Level_15_drops
 
 [ai_queue3,rogue]
-gosub(npc_death);
-if (npc_findhero = ^false) {
+if (npc_findhero = false) {
     return;
 }
+if (npc_findhero = true) {
+    queue(rogue_kill, 0);
+}
+gosub(npc_death);
 
 // Normal drop
-obj_add(npc_coord, npc_param(death_drop), 1, ^lootdrop_duration);
+obj_add(npc_coord, npc_param(death_drop), 1, 200);
 
 // Treasure trail
 ~trail_easycluedrop(128, npc_coord);
@@ -16,55 +19,87 @@ obj_add(npc_coord, npc_param(death_drop), 1, ^lootdrop_duration);
 def_int $dropint = random(128);
 if ($dropint < 2) {
     // 2/128
-    obj_add(npc_coord, bronze_med_helm, 1, ^lootdrop_duration);
+    obj_add(npc_coord, bronze_med_helm, 1, 200);
 } else if ($dropint < 3) {
     // 1/128
-    obj_add(npc_coord, iron_dagger, 1, ^lootdrop_duration);
+    obj_add(npc_coord, iron_dagger, 1, 200);
 } else if ($dropint < 25) {
     // 22/128
-    obj_add(npc_coord, bolt, ~random_range(2, 12), ^lootdrop_duration);
+    obj_add(npc_coord, bolt, ~random_range(2, 12), 200);
 } else if ($dropint < 28) {
     // 3/128
-    obj_add(npc_coord, bronze_arrow, 7, ^lootdrop_duration);
+    obj_add(npc_coord, bronze_arrow, 7, 200);
 } else if ($dropint < 30) {
     // 2/128
-    obj_add(npc_coord, earthrune, 4, ^lootdrop_duration);
+    obj_add(npc_coord, earthrune, 4, 200);
 } else if ($dropint < 32) {
     // 2/128
-    obj_add(npc_coord, firerune, 6, ^lootdrop_duration);
+    obj_add(npc_coord, firerune, 6, 200);
 } else if ($dropint < 34) {
     // 2/128
-    obj_add(npc_coord, mindrune, 9, ^lootdrop_duration);
+    obj_add(npc_coord, mindrune, 9, 200);
 } else if ($dropint < 35) {
     // 1/128
-    obj_add(npc_coord, chaosrune, 2, ^lootdrop_duration);
+    obj_add(npc_coord, chaosrune, 2, 200);
 } else if ($dropint < 58) {
     // 23/128
-    obj_add(npc_coord, ~randomherb, ^lootdrop_duration);
+    obj_add(npc_coord, ~randomherb, 200);
 } else if ($dropint < 96) {
     // 38/128
-    obj_add(npc_coord, coins, 3, ^lootdrop_duration);
+    obj_add(npc_coord, coins, 3, 200);
+} else if ($dropint < 98) {
+    obj_add(npc_coord, lockpick, 1, ^lootdrop_duration);
 } else if ($dropint < 105) {
     // 9/128
-    obj_add(npc_coord, coins, 5, ^lootdrop_duration);
+    obj_add(npc_coord, coins, 5, 200);
 } else if ($dropint < 109) {
-    // 4/128
-    obj_add(npc_coord, coins, 15, ^lootdrop_duration);
+    def_int $random2 = random(128);
+    if (%r_taskstatus = ^r_inprogress) {
+        if (%r_taskamount = ^r_easy) {
+            if ($random2 < 45){
+                obj_add(npc_coord, rogue_casket_easy, 1,^lootdrop_duration);
+            }
+        } else if (%r_taskamount = ^r_medium) {
+            if ($random2 > 45){
+                obj_add(npc_coord, rogue_casket_medium, 1,^lootdrop_duration);
+            }
+        } else if (%r_taskamount = ^r_hard) {
+            if ($random2 > 100){
+                obj_add(npc_coord, rogue_casket_hard, 1,^lootdrop_duration);
+            }
+        } else if (%r_taskamount = ^r_insane) {
+            if ($random2 > 127){
+                obj_add(npc_coord, rogue_casket_insane, 1,^lootdrop_duration);
+            }
+        }
+    }
+    obj_add(npc_coord, coins, 15, 200);
 } else if ($dropint < 110) {
     // 1/128
-    obj_add(npc_coord, coins, 25, ^lootdrop_duration);
+    obj_add(npc_coord, coins, 25, 200);
+} else if ($dropint < 112) {
+    obj_add(npc_coord, trout, 5, ^lootdrop_duration);
 } else if ($dropint < 115) {
     // 5/128
-    obj_add(npc_coord, fishing_bait, 1, ^lootdrop_duration);
+    obj_add(npc_coord, fishing_bait, 1, 200);
 } else if ($dropint < 117) {
     // 2/128
-    obj_add(npc_coord, copper_ore, 1, ^lootdrop_duration);
+    obj_add(npc_coord, copper_ore, 1, 200);
 } else if ($dropint < 119) {
     // 2/128
-    obj_add(npc_coord, earth_talisman, 1, ^lootdrop_duration);
+    obj_add(npc_coord, earth_talisman, 1, 200);
 } else if ($dropint < 120) {
     // 1/128
-    obj_add(npc_coord, cabbage, 1, ^lootdrop_duration);
+    obj_add(npc_coord, cabbage, 1, 200);
+} else if ($dropint < 126) {
+    obj_add(npc_coord, ~scrollpack, 200);
+} else if ($dropint < 128) {
+    obj_add(npc_coord, ~talisman_table, ^lootdrop_duration);
 }
 
 // 8/128 nothing
+[queue,rogue_kill]
+if (%e_ctoggle = ^e_toggle_on){
+    mes("You etch another tally into your ledger.");
+}
+%rogue_kc = calc(%rogue_kc + 1);

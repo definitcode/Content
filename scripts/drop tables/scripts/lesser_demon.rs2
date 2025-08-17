@@ -1,11 +1,13 @@
 [ai_queue3,lesser_demon] @ai_queue3_lesser_demon;
 
 [label,ai_queue3_lesser_demon]
-gosub(npc_death);
-if (npc_findhero = ^false) {
+if (npc_findhero = false) {
     return;
 }
-
+if (npc_findhero = true) {
+    queue(lesser_demon_kill, 0);
+}
+gosub(npc_death);
 obj_add(npc_coord, npc_param(death_drop), 1, ^lootdrop_duration);
 
 def_int $random = random(128);
@@ -41,12 +43,22 @@ if ($random < 4) {
     obj_add(npc_coord, coins, 40, ^lootdrop_duration);
 } else if ($random < 111) {
     obj_add(npc_coord, ~randomherb, ^lootdrop_duration);
+} else if ($random < 112) {
+    obj_add(npc_coord, ~mid_tier_items, ^lootdrop_duration);
 } else if ($random < 113) {
     obj_add(npc_coord, gold_ore, 1, ^lootdrop_duration);
 } else if ($random < 116) {
-    obj_add(npc_coord, deathrune, 3, ^lootdrop_duration);
+    obj_add(npc_coord, deathrune, 30, ^lootdrop_duration);
 } else if ($random < 121) {
-    obj_add(npc_coord, chaosrune, 12, ^lootdrop_duration);
+    obj_add(npc_coord, chaosrune, 30, ^lootdrop_duration);
 } else {
     obj_add(npc_coord, coins, 10, ^lootdrop_duration);
+    obj_add(npc_coord, ~randomjewel, ^lootdrop_duration);
+    obj_add(npc_coord, ~grindingtable, ^lootdrop_duration);
 }
+
+[queue,lesser_demon_kill]
+if (%e_ctoggle = ^e_toggle_on){
+    mes("You etch another tally into your ledger.");
+}
+%lesser_demon_kc = calc(%lesser_demon_kc + 1);

@@ -1,0 +1,48 @@
+[combat_ring]
+name=Combat Ring
+desc=A meaningful ring.
+cost=15000
+model=model_2677_obj
+recol1s=32767
+recol1d=0
+2dxof=3
+2dyof=-35
+2dzoom=830
+2dyan=180
+2dzan=2024
+2dxan=268
+iop2=Wear
+iop3=Toggle
+wearpos=ring
+weight=6g
+category=e_items
+respawnrate=500
+param=no_alchemy,^true
+tradeable=no
+
+
+[thieving_gloves]
+name=Sticky Gloves
+desc=These gloves will surely obtain more!
+cost=1000000
+model=model_2649_obj
+recol1s=9473
+recol1d=34
+recol2s=10468
+recol2d=33
+2dxof=8
+2dyof=-8
+2dzoom=930
+2dyan=828
+2dxan=420
+iop2=Wear
+wearpos=hands
+manwear=model_179_obj_wear,0
+womanwear=model_356_obj_wear,0
+weight=8oz
+members=yes
+param=slashdefence,3
+param=crushdefence,4
+param=rangedefence,2
+tradeable=yes
+param=no_alchemy,^true

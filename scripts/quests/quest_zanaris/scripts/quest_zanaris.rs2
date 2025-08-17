@@ -69,6 +69,36 @@ p_delay(1);
 anim(null, 0);
 
 [opheldu,dramen_branch]
+def_obj $knife = ~fletching_checker;
+switch_obj($knife) {
+    case e_bronze_knife : {
+        @cut_dramenstaff;
+    }
+    case e_iron_knife   : {
+        @cut_dramenstaff;
+    }
+    case e_steel_knife  : {
+        @cut_dramenstaff;
+    }
+    case e_mithril_knife : {
+        @cut_dramenstaff;
+    }
+    case e_adamant_knife : {
+        @cut_dramenstaff;
+    }
+    case e_rune_knife   : {
+        @cut_dramenstaff;
+    }
+    case e_dragon_knife : {
+        @cut_dramenstaff;
+    }
+    case founders_knife : {
+        @cut_dramenstaff;
+    }
+}
+if ($knife = null){
+    mes("You don't have a knife to make a fletching item.");
+}
 if(last_useitem = knife) {
     @cut_dramenstaff;
 }

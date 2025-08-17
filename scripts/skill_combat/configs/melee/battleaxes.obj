@@ -1,7 +1,7 @@
 [iron_battleaxe]
 name=Iron battleaxe
 desc=A vicious looking axe.
-cost=182
+cost=250
 model=model_2778_obj
 recol1s=15855
 recol1d=8456
@@ -31,7 +31,7 @@ param=crush_sound,baxe_crush
 [steel_battleaxe]
 name=Steel battleaxe
 desc=A vicious looking axe.
-cost=650
+cost=2785
 model=model_2778_obj
 2dxof=-7
 2dyof=-2
@@ -59,7 +59,7 @@ param=crush_sound,baxe_crush
 [black_battleaxe]
 name=Black battleaxe
 desc=A vicious looking axe.
-cost=1248
+cost=2850
 model=model_2778_obj
 recol1s=15855
 recol1d=0
@@ -89,7 +89,7 @@ param=crush_sound,baxe_crush
 [mithril_battleaxe]
 name=Mithril battleaxe
 desc=A vicious looking axe.
-cost=1690
+cost=3850
 model=model_2778_obj
 recol1s=15855
 recol1d=6346
@@ -119,7 +119,7 @@ param=crush_sound,baxe_crush
 [adamant_battleaxe]
 name=Adamant battleaxe
 desc=A vicious looking axe.
-cost=4160
+cost=4850
 model=model_2778_obj
 recol1s=15855
 recol1d=6438
@@ -149,7 +149,7 @@ param=crush_sound,baxe_crush
 [rune_battleaxe]
 name=Rune battleaxe
 desc=A vicious looking axe.
-cost=41600
+cost=5850
 model=model_2778_obj
 recol1s=15855
 recol1d=6476
@@ -205,33 +205,3 @@ param=crushattack_anim,human_blunt_pound
 param=defend_anim,human_axe_block
 param=slash_sound,baxe_slash
 param=crush_sound,baxe_crush
-
-[dragon_battleaxe]
-name=Dragon battleaxe
-desc=A vicious looking axe.
-members=yes
-cost=200000
-model=model_2801_obj
-2dxof=1
-2dyof=-3
-2dzoom=1360
-2dyan=2020
-2dxan=420
-iop2=Wield
-wearpos=righthand
-manwear=model_559_obj_wear,0
-womanwear=model_559_obj_wear,6
-category=weapon_axe
-weight=6lb
-param=stabattack,-2
-param=slashattack,70
-param=crushattack,65
-param=rangedefence,-1
-param=strengthbonus,85
-param=attackrate,6
-param=slashattack_anim,human_axe_hack
-param=crushattack_anim,human_blunt_pound
-param=defend_anim,human_axe_block
-param=slash_sound,baxe_slash
-param=crush_sound,baxe_crush
-param=specwep,^true

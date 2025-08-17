@@ -1,0 +1,12 @@
+^notfounder = 0
+^founder = 1
+^hcfounder = 2
+^hcimfounder = 3
+^uimfounder = 4
+^hcuimfounder = 5
+^imfounder = 6
+
+// transmog
+
+^transmog_off = 0
+^transmog_on = 1

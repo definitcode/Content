@@ -89,7 +89,7 @@ if ($current_level < $thieving_level) {
 }
 
 sound_synth(locked, 0, 0); // after first check, but before 2nd
-if (inv_total(inv, lockpick) < 1) {
+if (inv_total(inv, lockpick) < 1 | inv_total(inv, rogue_tools) < 1) {
     mes("You need a lockpick for this lock.");
     return;
 }

@@ -1,8 +1,11 @@
 [ai_queue3,white_knight]
-gosub(npc_death);
-if (npc_findhero = ^false) {
+if (npc_findhero = false) {
     return;
 }
+if (npc_findhero = true) {
+    queue(white_knight_kill, 0);
+}
+gosub(npc_death);
 
 // Default drop from config.
 obj_add(npc_coord, npc_param(death_drop), 1, ^lootdrop_duration);
@@ -30,7 +33,7 @@ if ($random < 2) { // 2
 } else if ($random < 31) { // 1
     obj_add(npc_coord, adamant_arrow, 2, ^lootdrop_duration);
 } else if ($random < 32) { // 1
-    if (map_members = ^true) {
+    if (map_members = true) {
         obj_add(npc_coord, bloodrune, 2, ^lootdrop_duration);
     }
 } else if ($random < 33) { // 1
@@ -65,4 +68,13 @@ if ($random < 2) { // 2
     obj_add(npc_coord, pot_flour, 1, ^lootdrop_duration);
 } else if ($random < 126) { // 1
     obj_add(npc_coord, ~randomjewel, ^lootdrop_duration);
-} // 2 for nothing
+    obj_add(npc_coord, ~grindingtable, ^lootdrop_duration);
+} else if ($random < 127) {
+    obj_add(npc_coord, ~mid_tier_items, ^lootdrop_duration);
+}
+
+[queue,white_knight_kill]
+if (%e_ctoggle = ^e_toggle_on){
+    mes("You etch another tally into your ledger.");
+}
+%white_knight_kc = calc(%white_knight_kc + 1);

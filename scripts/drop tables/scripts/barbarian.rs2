@@ -1,10 +1,12 @@
 // Level 7 & 8 in Barbarian Village
 [ai_queue3,_barbarian]
-gosub(npc_death);
-if (npc_findhero = ^false) {
+if (npc_findhero = false) {
     return;
 }
-
+if(npc_findhero = true) { // happens before npc_death
+    queue(barbarian_kill, 0);
+}
+gosub(npc_death);
 // Default drop from config.
 obj_add(npc_coord, npc_param(death_drop), 1, ^lootdrop_duration);
 
@@ -53,14 +55,27 @@ if ($random < 6) {
     obj_add(npc_coord, flier, 1, ^lootdrop_duration);
 } else if ($random < 92) {
     obj_add(npc_coord, ring_mould, 1, ^lootdrop_duration);
+} else if ($random < 95) {
+    obj_add(npc_coord, ~low_tier_items, ^lootdrop_duration);
 }
+[queue,barbarian_kill]
+if (%e_ctoggle = ^e_toggle_on){
+    mes("You etch another tally into your ledger.");
+}
+%barbarian_kc = calc(%barbarian_kc + 1);
 
 [ai_queue3,gunthor_the_brave]
-gosub(npc_death);
-if (npc_findhero = ^false) {
+if (npc_findhero = false) {
     return;
 }
-
+if(npc_findhero = true) { // happens before npc_death
+    queue(gunthor_kill, 0);
+}
+gosub(npc_death);
+if (%hero_solo_progress = ^hero_solo_killed_gunthor){
+    mes("You have defeated Gunthor the Coward!");
+    obj_add(npc_coord, gunthors_battleaxe, 1, ^lootdrop_duration);
+}
 // Default drop from config.
 obj_add(npc_coord, npc_param(death_drop), 1, ^lootdrop_duration);
 
@@ -113,4 +128,74 @@ if ($random < 6) {
     obj_add(npc_coord, flier, 1, ^lootdrop_duration);
 } else if ($random < 96) {
     obj_add(npc_coord, ~randomjewel, ^lootdrop_duration);
+} else if ($random < 97) {
+    obj_add(npc_coord, ~low_tier_items, ^lootdrop_duration);
+} else if ($random < 127) {
+    obj_add(npc_coord, ~mid_tier_items, ^lootdrop_duration);
+}
+[queue,gunthor_kill]
+if (%e_ctoggle = ^e_toggle_on){
+    mes("You etch another tally into your ledger.");
+}
+%gunthor_kc = calc(%gunthor_kc + 1);
+if (%hero_solo_progress = ^hero_solo_kill_gunthor){
+    %hero_solo_progress = ^hero_solo_killed_gunthor;
+}
+
+[ai_queue1,gunthor_the_brave]
+def_npc_mode $npc_mode = npc_getmode;
+~npc_default_retaliate;
+if (finduid(%npc_attacking_uid) = true & $npc_mode ! opplayer2) { // in osrs it checks mode rather than ~npc_out_of_combat
+    npc_huntall(npc_coord, 5, 0);
+    while (npc_huntnext = true) {
+        if (npc_getmode = opplayer2) {
+            npc_say("WE must PROTECT our LEADER!");
+            %npc_aggressive_player = uid;
+            ~npc_default_retaliate;
+        }
+        if (%hero_solo_progress = ^hero_solo_kill_gunthor){
+            if (npc_stat(hitpoints) < 50){
+                npc_statadd(strength, 5, 0);
+                npc_say("*AGHHHHHH* You really made a mistake now!");
+            } else if (npc_stat(hitpoints) < 25){
+                npc_statadd(strength, 10, 0);
+                npc_say("I'LL KILL YOU IF ITS THE LAST THING I DO!");
+            }
+        }
+    }
+}
+
+[ai_queue1,barbarian_woman]
+def_npc_mode $npc_mode = npc_getmode;
+~npc_default_retaliate;
+if (finduid(%npc_attacking_uid) = true & $npc_mode ! opplayer2) { // in osrs it checks mode rather than ~npc_out_of_combat
+    npc_huntall(npc_coord, 5, 0);
+    while (npc_huntnext = true) {
+        if (npc_category ! barbarian) {
+            return;
+        }
+        
+        if (npc_getmode ! opplayer2) {
+            npc_say("WE must PROTECT our sisters!");
+            %npc_aggressive_player = uid;
+            ~npc_default_retaliate;
+        }
+    }
+}
+
+[ai_queue1,barbarian]
+def_npc_mode $npc_mode = npc_getmode;
+~npc_default_retaliate;
+if (finduid(%npc_attacking_uid) = true & $npc_mode ! opplayer2) { // in osrs it checks mode rather than ~npc_out_of_combat
+    npc_huntall(npc_coord, 5, 0);
+    while (npc_huntnext = true) {
+        if (npc_category ! barbarian) {
+            return;
+        }        
+        if (npc_getmode ! opplayer2) {
+            npc_say("WE must PROTECT our brothers!");
+            %npc_aggressive_player = uid;
+            ~npc_default_retaliate;
+        }
+    }
 }

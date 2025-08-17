@@ -1,11 +1,29 @@
 [ai_queue3,highwayman]
-gosub(npc_death);
-if (npc_findhero = ^false) {
+if (npc_findhero = false) {
     return;
 }
-
+if (npc_findhero = true) {
+    queue(highwayman_kill, 0);
+}
+gosub(npc_death);
 // Default drop from config.
 obj_add(npc_coord, npc_param(death_drop), 1, ^lootdrop_duration);
-
+~trail_easycluedrop(128, npc_coord);
+~trail_checkmediumdrop;
 // Normal drop
 obj_add(npc_coord, black_cape, 1, ^lootdrop_duration);
+
+
+def_int $random = random(10000);
+if ($random < 9997) {
+    obj_add(npc_coord, lockpick, 1, ^lootdrop_duration);
+    return;
+} else if ($random > 9998)  {
+    obj_add(npc_coord, highwaymanmask, 1, ^lootdrop_duration);
+}
+
+[queue,highwayman_kill]
+if (%e_ctoggle = ^e_toggle_on){
+    mes("You etch another tally into your ledger.");
+}
+%highwayman_kc = calc(%highwayman_kc + 1);

@@ -136,7 +136,6 @@ if (testbit(%thieving_stall_timer, ^gem_stall_index) = ^true) {
 
 [queue,stolen_from_stall_baker]
 %thieving_stall_timer = clearbit(%thieving_stall_timer, ^baker_stall_index);
-
 [queue,stolen_from_stall_tea]
 %thieving_stall_timer = clearbit(%thieving_stall_timer, ^tea_stall_index);
 

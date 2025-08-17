@@ -1,3 +1,19 @@
+[dragon_dart_tip]
+category=category_969
+name=Dragon dart tip
+desc=A deadly looking dart tip made of runite - needs feathers for flight.
+cost=200
+model=model_2518_obj
+recol1s=21140
+recol1d=14336
+members=yes
+stackable=yes
+2dxof=5
+2dzoom=720
+2dyan=308
+2dxan=344
+weight=8g
+
 [bronze_dart_tip]
 category=category_969
 name=Bronze dart tip

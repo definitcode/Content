@@ -4,10 +4,32 @@
 
 [label,rat_droptable]
 
-gosub(npc_death);
-if (npc_findhero = ^false) {
+if (npc_findhero = false) {
     return;
 }
+if (npc_findhero = true) {
+    queue(rat_kill, 0);
+}
+gosub(npc_death);
 
 obj_add(npc_coord, npc_param(death_drop), 1, ^lootdrop_duration);
-obj_add(npc_coord, raw_rat_meat, 1, ^lootdrop_duration);
+if (%hunter > 349) {
+    obj_add(npc_coord, raw_rat_meat, 4, ^lootdrop_duration);
+    if (%e_ctoggle = ^e_toggle_on) {
+        mes("[4x] Resources!");
+    }
+} else if (%hunter > 189) {
+    obj_add(npc_coord, raw_rat_meat, 2, ^lootdrop_duration);
+    if (%e_ctoggle = ^e_toggle_on) {
+        mes("[2x] Resources!");
+    }
+} else {
+    obj_add(npc_coord, raw_rat_meat, 1, ^lootdrop_duration);
+}
+
+
+[queue,rat_kill]
+if (%e_ctoggle = ^e_toggle_on){
+    mes("You etch another tally into your ledger.");
+}
+%rat_kc = calc(%rat_kc + 1);

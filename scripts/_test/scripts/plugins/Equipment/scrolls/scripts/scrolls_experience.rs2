@@ -1,0 +1,22 @@
+// =============================
+// ||   Scroll Inscriptions   ||
+// =============================
+// || Created By: Shadowfall  ||
+// =============================
+// ||     Version: 0.1.0      ||
+// =============================
+
+
+[opheld1,expscroll]
+if (%gamemode_selected = ^gamemode_pvp){
+    mes("You cannot do this.");
+    return;
+}
+%xplamp = ^xplamp_none;
+if_openmain(xplamp);
+
+
+[proc,expscroll_used]
+if_close;
+inv_del(inv, expscroll, 1);
+%xplamp = ^xplamp_none;

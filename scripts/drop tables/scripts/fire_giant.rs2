@@ -1,9 +1,13 @@
 [ai_queue3,firegiant]
-gosub(npc_death);
-if (npc_findhero = ^false) {
+if (npc_findhero = false) {
     return;
 }
+if (npc_findhero = true) {
+    queue(fire_giant_kill, 0);
+}
+gosub(npc_death);
 // Default drop from config.
+~trail_hardcluedrop(128, npc_coord);
 obj_add(npc_coord, npc_param(death_drop), 1, ^lootdrop_duration);
 
 def_int $random = random(128);
@@ -15,7 +19,7 @@ if ($random < 3) {
 } else if ($random < 6) {
     obj_add(npc_coord, fire_battlestaff, 1, ^lootdrop_duration);
 } else if ($random < 7) {
-    obj_add(npc_coord, rune_scimitar, 1, ^lootdrop_duration);
+    obj_add(npc_coord, mithril_scimitar, 1, ^lootdrop_duration);
 } else if ($random < 17) {
     obj_add(npc_coord, firerune, 150, ^lootdrop_duration);
 } else if ($random < 24) {
@@ -27,7 +31,7 @@ if ($random < 3) {
 } else if ($random < 34) {
     obj_add(npc_coord, firerune, 37, ^lootdrop_duration);
 } else if ($random < 35) {
-    obj_add(npc_coord, lawrune, 2, ^lootdrop_duration);
+    obj_add(npc_coord, lawrune, 5, ^lootdrop_duration);
 } else if ($random < 54) {
     obj_add(npc_coord, ~randomherb, ^lootdrop_duration);
 } else if ($random < 94) {
@@ -46,8 +50,20 @@ if ($random < 3) {
     obj_add(npc_coord, steel_bar, 1, ^lootdrop_duration);
 } else if ($random < 116) {
     obj_add(npc_coord, 2dose1strength, 1, ^lootdrop_duration);
+} else if ($random < 117) {
+    obj_add(npc_coord, ~talisman_table, ^lootdrop_duration);
+} else if ($random < 120) {
+    obj_add(npc_coord, macro_genilamp, 1, ^lootdrop_duration);
+} else if ($random < 121) {
+    obj_add(npc_coord, ~mid_tier_items, ^lootdrop_duration);
 } else if ($random < 127) {
     obj_add(npc_coord, ~randomjewel, ^lootdrop_duration);
+    obj_add(npc_coord, ~grindingtable, ^lootdrop_duration);
 } else if ($random <  128) {
     obj_add(npc_coord, ~ultrarare_getitem, ^lootdrop_duration);
 }
+[queue,fire_giant_kill]
+if (%e_ctoggle = ^e_toggle_on){
+    mes("You etch another tally into your ledger.");
+}
+%fire_giant_kc = calc(%fire_giant_kc + 1);

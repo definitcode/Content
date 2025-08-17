@@ -1,12 +1,81 @@
 // logs
 [opheldu,_category_22]
-switch_obj(last_useitem) {
-    case knife : @fletch_log(last_item);
+switch_obj(last_useitem){
+    case e_dragonknife : @fletch_log(last_useitem);
+    case e_adamant_knife : @fletch_log(last_useitem);
+    case e_mithril_knife : @fletch_log(last_useitem);
+    case e_steel_knife : @fletch_log(last_useitem);
+    case e_iron_knife : @fletch_log(last_useitem);
+    case e_bronze_knife : @fletch_log(last_useitem);
+    case founders_knife : @fletch_log(last_useitem);
+    case hc_knife : @fletch_log(last_useitem);
+    case knife : @fletch_log(last_useitem);
+    case founders_tinderbox : @light_logs_inv(last_slot);
+    case dragon_tinderbox : @light_logs_inv(last_slot);
+    case rune_tinderbox : @light_logs_inv(last_slot);
+    case adamant_tinderbox : @light_logs_inv(last_slot);
+    case mithril_tinderbox : @light_logs_inv(last_slot);
+    case steel_tinderbox : @light_logs_inv(last_slot);
+    case iron_tinderbox : @light_logs_inv(last_slot);
+    case bronze_tinderbox : @light_logs_inv(last_slot);
     case tinderbox : @light_logs_inv(last_slot);
-    case default : ~displaymessage(^dm_default);
+}
+if (last_useitem = null){
+    ~displaymessage(^dm_default);
 }
 
 [label,fletch_log](obj $log)
+if(%gamemode_selected = ^gamemode_pvp){
+    mes("You cannot do this.");
+    return;
+}
+def_int $xp_mult = 1;
+def_int $shaft_mult = 1;
+def_obj $knife = ~fletching_checker;
+switch_obj($knife) {
+    case e_bronze_knife : {
+        $xp_mult = 1; 
+        $shaft_mult = 1;
+    }
+    case e_iron_knife   : {
+        $xp_mult = 1; 
+        $shaft_mult = 1;
+    }
+    case e_steel_knife  : {
+        $xp_mult = 2;
+        $shaft_mult = 2;
+    }
+    case e_mithril_knife : {
+        $xp_mult = 1; 
+        $shaft_mult = 2;
+    }
+    case e_adamant_knife : {
+        $xp_mult = 1; 
+        $shaft_mult = 3;
+    }
+    case e_rune_knife   : {
+        $xp_mult = 2; 
+        $shaft_mult = 3;
+    }
+    case e_dragon_knife : {
+        $xp_mult = 2; 
+        $shaft_mult = 4;
+    }
+    case founders_knife : {
+        $xp_mult = 1; 
+        $shaft_mult = 1;
+    }
+    case default : {
+        $xp_mult = 1; 
+        $shaft_mult = 1;
+    }
+}
+
+if ($knife = null) {
+    anim(null, 0);
+    mes("You do not have a knife you can use.");
+    return;
+}
 if (map_members = ^false) {
     mes(^mes_members_fletching); // guess
     return;
@@ -44,8 +113,10 @@ if ($product = null) {
 def_int $level = 1;
 // default to shafts
 def_int $count = 1;
-def_int $fletching_experience = multiply($shaft_count, 5);
+$shaft_count = calc($shaft_count * $shaft_mult);
+def_int $fletching_experience = multiply($shaft_count, $xp_mult);
 def_string $message;
+
 // 2005-osrs, rsc
 if ($product = $obj2) {
     $product, $level, $fletching_experience = db_getfield($data, fletch_bow_table:shortbow, 0);
@@ -56,7 +127,7 @@ if ($product = $obj2) {
 } else {
     $message = "You carefully cut the wood into <tostring($shaft_count)> arrow shafts.";
     $count = $shaft_count;
-    $fletching_experience = multiply($shaft_count, 5);
+    $fletching_experience = multiply($shaft_count, $xp_mult);
 }
 if (stat(fletching) < $level) {
     // osrs has a level 1 fail message for arrow shafts but i doubt 2004 used it

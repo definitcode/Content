@@ -6,8 +6,8 @@ size=40
 restock=yes
 stackall=yes
 allstock=no
-stock1=dragon_longsword,2,500
-stock2=dragon_dagger,2,500
+stock1=dragon_longsword,0,500
+stock2=dragon_dagger,0,500
 
 [cheapringshop]
 // https://classic.runescape.wiki/w/Ruby_Ring_Shop

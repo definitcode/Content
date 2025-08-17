@@ -1,12 +1,15 @@
 [ai_queue3,necromancer]
-gosub(npc_death);
-if (npc_findhero = ^false) {
+if (npc_findhero = false) {
     return;
 }
+if (npc_findhero = true) {
+    queue(necromancer_kill, 0);
+}
+gosub(npc_death);
 
 // Default drop from config.
 obj_add(npc_coord, npc_param(death_drop), 1, ^lootdrop_duration);
-def_int $random = random(128);
+def_int $random = random(20);
 
 if ($random < 8) {
     obj_add(npc_coord, plainstaff, 1, ^lootdrop_duration);
@@ -62,5 +65,8 @@ if ($random < 8) {
     obj_add(npc_coord, coins, 29, ^lootdrop_duration);
 }
 
-
-
+[queue,necromancer_kill]
+if (%e_ctoggle = ^e_toggle_on){
+    mes("You etch another tally into your ledger.");
+}
+%necromancer_kc = calc(%necromancer_kc + 1);

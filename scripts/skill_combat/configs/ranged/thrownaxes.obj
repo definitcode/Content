@@ -128,10 +128,10 @@ param=rangeattack_sound,throwingaxe
 param=proj_launch,mithril_taxe_launch
 param=proj_travel,mithril_taxe_travel
 
-[adamnt_thrownaxe]
+[adamant_thrownaxe]
 members=yes
 cost=176
-name=Adamnt thrownaxe
+name=adamant thrownaxe
 desc=A finely balanced throwing axe.
 model=model_2752_obj
 recol1s=15855

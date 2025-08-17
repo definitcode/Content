@@ -101,8 +101,8 @@ wanderrange=2
 
 [newbie_basics_instructor]
 vislevel=hide
-name=RuneScape Guide
-desc=Your introduction to the world of RuneScape.
+name=only2004 Guide
+desc=Your introduction to the world of only2004.
 walkanim=human_walk_f,human_walk_b,human_walk_l,human_walk_r
 readyanim=human_ready
 op1=Talk-to
@@ -172,7 +172,7 @@ moverestrict=indoors
 [newbie_account_instructor]
 vislevel=hide
 name=Financial Advisor
-desc=An official representative from the First National Bank of RuneScape.
+desc=An official representative from the First National Bank of only2004.
 walkanim=human_walk_f,human_walk_b,human_walk_l,human_walk_r
 readyanim=human_ready
 op1=Talk-to
@@ -235,7 +235,7 @@ wanderrange=2
 [newbie_quest_instructor]
 vislevel=hide
 name=Quest Guide
-desc=Your introduction to the world of RuneScape.
+desc=Your introduction to the world of only2004.
 walkanim=human_walk_f,human_walk_b,human_walk_l,human_walk_r
 readyanim=human_ready
 op1=Talk-to

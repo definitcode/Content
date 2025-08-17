@@ -1,15 +1,19 @@
 [ai_queue3,hobgoblin_unarmed] // LVL 28 Hobgoblins
-gosub(npc_death);
-if (npc_findhero = ^false) {
+if (npc_findhero = false) {
     return;
 }
+if (npc_findhero = true) {
+    queue(hobgoblin_kill, 0);
+}
+gosub(npc_death);
 // Default drop from config.
 obj_add(npc_coord, npc_param(death_drop), 1, ^lootdrop_duration);
+~trail_easycluedrop(128, npc_coord);
 
 def_int $random = random(128);
 
 if ($random < 3) {
-    if (map_members = ^true) {
+    if (map_members = true) {
         obj_add(npc_coord, bronze_spear, 1, ^lootdrop_duration);
     } else {
         obj_add(npc_coord, goblin_armour, 1, ^lootdrop_duration);
@@ -19,13 +23,13 @@ if ($random < 3) {
 } else if ($random < 9) {
     obj_add(npc_coord, steel_dagger, 1, ^lootdrop_duration);
 } else if ($random < 11) {
-    if (map_members = ^true ){
+    if (map_members = true ){
         obj_add(npc_coord, iron_spear, 1, ^lootdrop_duration);
     } else {
         obj_add(npc_coord, coins, 28, ^lootdrop_duration);
     }
 } else if ($random < 13) {
-    if (map_members = ^true ){
+    if (map_members = true ){
         obj_add(npc_coord, steel_spear, 1, ^lootdrop_duration);
     } else {
         obj_add(npc_coord, coins, 28, ^lootdrop_duration);
@@ -66,13 +70,22 @@ if ($random < 3) {
     obj_add(npc_coord, goblin_armour, 1, ^lootdrop_duration);
 } else if ($random < 109) {
     obj_add(npc_coord, ~randomjewel, ^lootdrop_duration);
+    obj_add(npc_coord, ~grindingtable, ^lootdrop_duration);
+} else if ($random < 127) {
+    obj_add(npc_coord, ~mid_tier_items, ^lootdrop_duration);
+    obj_add(npc_coord, ~talisman_table, ^lootdrop_duration);
+} else if ($random < 128){
+    obj_add(npc_coord,yanillescroll, 1, ^lootdrop_duration);
 }
 
 [ai_queue3,hobgoblin_armed] // LVL 42 Hobgoblins
-gosub(npc_death);
-if (npc_findhero = ^false) {
+if (npc_findhero = false) {
     return;
 }
+if (npc_findhero = true) {
+    queue(hobgoblin_kill, 0);
+}
+gosub(npc_death);
 // Default drop from config.
 obj_add(npc_coord, npc_param(death_drop), 1, ^lootdrop_duration);
 
@@ -85,21 +98,21 @@ if ($random < 3) {
 } else if ($random < 7) {
     obj_add(npc_coord, steel_longsword, 1, ^lootdrop_duration);
 } else if ($random < 10) {
-    obj_add(npc_coord, lawrune, 2, ^lootdrop_duration);
+    obj_add(npc_coord, lawrune, 10, ^lootdrop_duration);
 } else if ($random < 12) {
-    obj_add(npc_coord, waterrune, 2, ^lootdrop_duration);
+    obj_add(npc_coord, waterrune, 25, ^lootdrop_duration);
 } else if ($random < 14) {
-    obj_add(npc_coord, firerune, 7, ^lootdrop_duration);
+    obj_add(npc_coord, firerune, 34, ^lootdrop_duration);
 } else if ($random < 16) {
-    obj_add(npc_coord, bodyrune, 6, ^lootdrop_duration);
+    obj_add(npc_coord, bodyrune, 60, ^lootdrop_duration);
 } else if ($random < 18) {
-    obj_add(npc_coord, chaosrune, 3, ^lootdrop_duration);
+    obj_add(npc_coord, chaosrune, 25, ^lootdrop_duration);
 } else if ($random < 20) {
-    obj_add(npc_coord, naturerune, 4, ^lootdrop_duration);
+    obj_add(npc_coord, naturerune, 25, ^lootdrop_duration);
 } else if ($random < 21) {
-    obj_add(npc_coord, cosmicrune, 2, ^lootdrop_duration);
+    obj_add(npc_coord, cosmicrune, 5, ^lootdrop_duration);
 } else if ($random < 22) {
-    if (map_members = ^true) {
+    if (map_members = true) {
         obj_add(npc_coord, iron_javelin, 5, ^lootdrop_duration);
     }
 } else if ($random < 29) {
@@ -107,7 +120,7 @@ if ($random < 3) {
 } else if ($random < 63) {
     obj_add(npc_coord, coins, 15, ^lootdrop_duration);
 } else if ($random < 75) {
-    obj_add(npc_coord, coins, 5, ^lootdrop_duration);
+    obj_add(npc_coord, coins, 500, ^lootdrop_duration);
 } else if ($random < 79) {
     obj_add(npc_coord, coins, 28, ^lootdrop_duration);
 } else if ($random < 83) {
@@ -115,7 +128,7 @@ if ($random < 3) {
 } else if ($random < 86) {
     obj_add(npc_coord, coins, 42, ^lootdrop_duration);
 } else if ($random < 89) {
-    if (map_members = ^true) {
+    if (map_members = true) {
         obj_add(npc_coord, coins, 1, ^lootdrop_duration);
     }
 } else if ($random < 90) {
@@ -126,4 +139,16 @@ if ($random < 3) {
     obj_add(npc_coord, goblin_armour, 1, ^lootdrop_duration);
 } else if ($random < 115) {
     obj_add(npc_coord, ~randomjewel, ^lootdrop_duration);
+    obj_add(npc_coord, ~grindingtable, ^lootdrop_duration);
+} else if ($random < 127) {
+    obj_add(npc_coord, ~mid_tier_items, ^lootdrop_duration);
+    obj_add(npc_coord, ~talisman_table, ^lootdrop_duration);
+} else if ($random < 128){
+    obj_add(npc_coord,yanillescroll, 1, ^lootdrop_duration);
 }
+
+[queue,hobgoblin_kill]
+if (%e_ctoggle = ^e_toggle_on){
+    mes("You etch another tally into your ledger.");
+}
+%hobgoblin_kc = calc(%hobgoblin_kc + 1);

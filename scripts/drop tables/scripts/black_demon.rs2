@@ -1,10 +1,13 @@
 [ai_queue3,_black_demon]
-gosub(npc_death);
-if (npc_findhero = ^false) {
+if (npc_findhero = false) {
     return;
 }
-
+if (npc_findhero = true) {
+    queue(black_demon_kill, 0);
+}
+gosub(npc_death);
 // Default drop from config.
+~trail_mediumcluedrop(128, npc_coord);
 obj_add(npc_coord, npc_param(death_drop), 1, ^lootdrop_duration);
 
 def_int $random = random(128);
@@ -22,15 +25,15 @@ if ($random < 4) {
 } else if ($random < 12) {
     obj_add(npc_coord, rune_chainbody, 1, ^lootdrop_duration);
 }else if ($random < 20) {
-    obj_add(npc_coord, airrune, 50, ^lootdrop_duration);
+    obj_add(npc_coord, airrune, 250, ^lootdrop_duration);
 } else if ($random < 27) {
-    obj_add(npc_coord, chaosrune, 10, ^lootdrop_duration);
+    obj_add(npc_coord, chaosrune, 75, ^lootdrop_duration);
 } else if ($random < 31) {
     obj_add(npc_coord, bloodrune, 7, ^lootdrop_duration);
 } else if ($random < 32) {
-    obj_add(npc_coord, firerune, 37, ^lootdrop_duration);
+    obj_add(npc_coord, firerune, 90, ^lootdrop_duration);
 } else if ($random < 33) {
-    obj_add(npc_coord, lawrune, 3, ^lootdrop_duration);
+    obj_add(npc_coord, lawrune, 20, ^lootdrop_duration);
 } else if ($random < 56) {
     obj_add(npc_coord, ~randomherb, ^lootdrop_duration);
 } else if ($random < 96) {
@@ -48,9 +51,22 @@ if ($random < 4) {
 } else if ($random < 121) {
     obj_add(npc_coord, adamantite_bar, 1, ^lootdrop_duration);
 } else if ($random < 122) {
+    obj_add(npc_coord, ~high_tier_items, ^lootdrop_duration);
+} else if ($random < 122) {
     obj_add(npc_coord, 3dose1defense, 1, ^lootdrop_duration);
+} else if ($random < 123) {
+    obj_add(npc_coord, macro_genilamp, 1, ^lootdrop_duration);
+    obj_add(npc_coord, ~randomjewel, ^lootdrop_duration);
+    obj_add(npc_coord, ~grindingtable, ^lootdrop_duration);
 } else if ($random < 127) {
     obj_add(npc_coord, ~randomjewel, ^lootdrop_duration);
+    obj_add(npc_coord, ~grindingtable, ^lootdrop_duration);
 } else if ($random < 128) {
     obj_add(npc_coord, ~ultrarare_getitem, ^lootdrop_duration);
 }
+
+[queue,black_demon_kill]
+if (%e_ctoggle = ^e_toggle_on){
+    mes("You etch another tally into your ledger.");
+}
+%black_demon_kc = calc(%black_demon_kc + 1);

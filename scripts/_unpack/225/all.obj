@@ -651,16 +651,6 @@ model=model_2411_obj
 2dxan=812
 weight=5lb
 
-[halberd]
-name=Halberd
-model=model_2791_obj
-2dxof=-7
-2dyof=-6
-2dzoom=1580
-2dyan=400
-2dxan=224
-weight=10lb
-
 [warhammer]
 name=Warhammer
 model=model_2731_obj
